@@ -21,12 +21,8 @@ public class Annonce {
     private Offre offre;
 
     // Une annonce peut être liée à plusieurs candidats
-    @ManyToMany
-    @JoinTable(
-            name = "candidat_annonce",
-            joinColumns = @JoinColumn(name = "annonce_id"),
-            inverseJoinColumns = @JoinColumn(name = "candidat_id")
-    )
-    private List<Candidat> candidats;
+    @ManyToOne
+    @JoinColumn(name = "candidat_id")
+    private Candidat candidat;
 
 }

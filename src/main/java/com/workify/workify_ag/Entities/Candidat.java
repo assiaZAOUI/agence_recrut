@@ -1,8 +1,6 @@
 package com.workify.workify_ag.Entities;
 
-import jakarta.persistence.DiscriminatorValue;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -33,7 +31,7 @@ public class Candidat extends User{
     private double salaireSouhaite;
 
     // Un candidat peut postuler à plusieurs annonces
-    @ManyToMany(mappedBy = "candidats")
+    @OneToMany(mappedBy = "candidat", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Annonce> annonces;
 
 }

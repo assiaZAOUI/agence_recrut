@@ -5,7 +5,7 @@ import com.workify.workify_ag.DTOs.SignUpRequestEntreprise;
 import com.workify.workify_ag.DTOs.jwtAuthenticationResponse;
 import com.workify.workify_ag.Entities.ENUM.Roles;
 import com.workify.workify_ag.Entities.User;
-import com.workify.workify_ag.Repositorys.UserRepo;
+import com.workify.workify_ag.Repositorys.UserRepo.UserRepo;
 import com.workify.workify_ag.Services.JWT.JWTService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;

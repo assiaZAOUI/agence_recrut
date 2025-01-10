@@ -1,4 +1,4 @@
-package com.workify.workify_ag.Repositorys;
+package com.workify.workify_ag.Repositorys.UserRepo;
 
 import com.workify.workify_ag.Entities.ENUM.Roles;
 import com.workify.workify_ag.Entities.User;

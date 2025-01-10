@@ -2,7 +2,7 @@ package com.workify.workify_ag;
 import com.workify.workify_ag.Entities.Admin;
 import com.workify.workify_ag.Entities.ENUM.Roles;
 import com.workify.workify_ag.Entities.User;
-import com.workify.workify_ag.Repositorys.UserRepo;
+import com.workify.workify_ag.Repositorys.UserRepo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

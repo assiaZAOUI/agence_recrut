@@ -1,6 +1,6 @@
 package com.workify.workify_ag.Services.UserService;
 
-import com.workify.workify_ag.Repositorys.*;
+import com.workify.workify_ag.Repositorys.UserRepo.UserRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

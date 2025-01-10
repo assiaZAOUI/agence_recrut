@@ -14,6 +14,8 @@ public class Offre {
     private long idOffre;//numero
     private String numero;
     private String titre;
+    private String ville;
+    private String domaine;
     private int nbrAnneeExpDemander;
     private String CompetenceSouhaite;
     private boolean etat;
