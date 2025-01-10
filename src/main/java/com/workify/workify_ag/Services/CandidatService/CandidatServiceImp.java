@@ -1,8 +1,10 @@
-package com.workify.workify_ag.Services.CondidatService;
+package com.workify.workify_ag.Services.CandidatService;
 
-import com.workify.workify_ag.DTOs.*;
+import com.workify.workify_ag.DTOs.CandiatDTO.ModifierDiplomeCandidat;
+import com.workify.workify_ag.DTOs.CandiatDTO.ModifierExperienceCandidat;
+import com.workify.workify_ag.DTOs.CandiatDTO.ModifierSalaireCandidat;
 import com.workify.workify_ag.Entities.Candidat;
-import com.workify.workify_ag.Repositorys.CandidatRepository;
+import com.workify.workify_ag.Repositorys.CandidatRepo.CandidatRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

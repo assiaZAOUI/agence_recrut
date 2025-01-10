@@ -1,18 +1,17 @@
 package com.workify.workify_ag.Entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
+
+import java.util.List;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@DiscriminatorValue("ENTREPRISE")
 public class Entreprise extends User{
     private String adresse;
     private String telephone;
@@ -21,4 +20,8 @@ public class Entreprise extends User{
     private String nomEntreprise;
     private String raisonSocial;
     private String description;
+
+    // Une entreprise peut avoir plusieurs abonnements
+    @OneToMany(mappedBy = "entreprise", cascade = CascadeType.ALL)
+    private List<Abonnement> abonnements;
 }

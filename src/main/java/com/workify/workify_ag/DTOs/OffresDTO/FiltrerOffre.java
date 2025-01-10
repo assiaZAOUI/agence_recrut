@@ -1,4 +1,4 @@
-package com.workify.workify_ag.DTOs;
+package com.workify.workify_ag.DTOs.OffresDTO;
 
 import lombok.Data;
 

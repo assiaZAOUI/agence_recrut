@@ -1,4 +1,4 @@
-package com.workify.workify_ag.Repositorys;
+package com.workify.workify_ag.Repositorys.CandidatRepo;
 
 import com.workify.workify_ag.Entities.Candidat;
 import org.springframework.data.jpa.repository.JpaRepository;

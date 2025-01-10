@@ -1,14 +1,17 @@
 package com.workify.workify_ag.Entities;
 
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Data
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@DiscriminatorValue("CANDIDAT")
 public class Candidat extends User{
     private String adresse;
     private String telephone;
@@ -26,5 +29,9 @@ public class Candidat extends User{
     private String diplome;
     private int nbrAnneeExperiences;
     private double salaireSouhaite;
+
+    // Un candidat peut postuler à plusieurs annonces
+    @OneToMany(mappedBy = "candidat", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Annonce> annonces;
 
 }

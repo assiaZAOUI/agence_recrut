@@ -1,28 +1,37 @@
 package com.workify.workify_ag.Entities;
 
-import jakarta.persistence.Entity;
-
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.data.annotation.Id;
+
+import java.util.List;
+
 
 @Entity
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+@Data @NoArgsConstructor @AllArgsConstructor
+
 public class Offre {
-    @jakarta.persistence.Id
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long idOffre;//numero
+    private String numero;
     private String titre;
+    private String ville;
+    private String domaine;
     private int nbrAnneeExpDemander;
     private String CompetenceSouhaite;
     private boolean etat;
     private String niveauEtude;
-    private String ville;
-    private String domaine;
 
+    // Une offre peut être liée à plusieurs journaux
+    @ManyToMany
+    @JoinTable(
+            name = "offre_journal",
+            joinColumns = @JoinColumn(name = "offre_id"),
+            inverseJoinColumns = @JoinColumn(name = "journal_id")
+    )
+    private List<Journal> journaux;
 
+    // Une offre peut contenir plusieurs annonces
+    @OneToMany(mappedBy = "offre")
+    private List<Annonce> annonces;
 
 }

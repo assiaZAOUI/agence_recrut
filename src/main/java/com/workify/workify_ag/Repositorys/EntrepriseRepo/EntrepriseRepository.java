@@ -1,6 +1,5 @@
-package com.workify.workify_ag.Repositorys;
+package com.workify.workify_ag.Repositorys.EntrepriseRepo;
 
-import com.workify.workify_ag.Entities.Candidat;
 import com.workify.workify_ag.Entities.Entreprise;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

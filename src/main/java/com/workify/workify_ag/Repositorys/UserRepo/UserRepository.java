@@ -1,4 +1,4 @@
-package com.workify.workify_ag.Repositorys;
+package com.workify.workify_ag.Repositorys.UserRepo;
 
 import com.workify.workify_ag.Entities.ENUM.Roles;
 import com.workify.workify_ag.Entities.User;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface UserRepo extends JpaRepository<User, Long> {
+public interface UserRepository extends JpaRepository<User, Long> {
 
     Optional<User> findByEmail(String email);
     Optional<User> findByRole(Roles role);

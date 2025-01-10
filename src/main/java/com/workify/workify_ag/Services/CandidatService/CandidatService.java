@@ -1,8 +1,8 @@
-package com.workify.workify_ag.Services.CondidatService;
+package com.workify.workify_ag.Services.CandidatService;
 
-import com.workify.workify_ag.DTOs.ModifierDiplomeCandidat;
-import com.workify.workify_ag.DTOs.ModifierExperienceCandidat;
-import com.workify.workify_ag.DTOs.ModifierSalaireCandidat;
+import com.workify.workify_ag.DTOs.CandiatDTO.ModifierDiplomeCandidat;
+import com.workify.workify_ag.DTOs.CandiatDTO.ModifierExperienceCandidat;
+import com.workify.workify_ag.DTOs.CandiatDTO.ModifierSalaireCandidat;
 
 public interface CandidatService {
 

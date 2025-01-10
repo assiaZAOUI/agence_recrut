@@ -1,7 +1,7 @@
 package com.workify.workify_ag.Controllers.CandidatControllers;
 
-import com.workify.workify_ag.DTOs.*;
-import com.workify.workify_ag.Services.CondidatService.CandidatServiceImp;
+import com.workify.workify_ag.DTOs.CandiatDTO.*;
+import com.workify.workify_ag.Services.CandidatService.CandidatServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PutMapping;
