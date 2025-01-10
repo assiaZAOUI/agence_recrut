@@ -15,20 +15,12 @@ public class Annonce {
     @JoinColumn(name = "entreprise_id")
     private Entreprise entreprise; // L'entreprise qui a publié l'annonce
 
-    // Relation N:N avec Offre
-    @ManyToMany(mappedBy = "annonces")
-    private List<Offre> offres;
+    // Chaque annonce est liée à une offre
+    @ManyToOne
+    @JoinColumn(name = "offre_id")
+    private Offre offre;
 
-    // Relation N:N avec Edition
-    @ManyToMany
-    @JoinTable(
-            name = "annonce_edition",
-            joinColumns = @JoinColumn(name = "annonce_id"),
-            inverseJoinColumns = @JoinColumn(name = "edition_id")
-    )
-    private List<Edition> editions;
-
-    // Relation N:N avec Candidat
+    // Une annonce peut être liée à plusieurs candidats
     @ManyToMany
     @JoinTable(
             name = "candidat_annonce",

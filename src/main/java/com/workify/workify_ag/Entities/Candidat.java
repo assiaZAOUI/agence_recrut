@@ -32,7 +32,7 @@ public class Candidat extends User{
     private int nbrAnneeExperiences;
     private double salaireSouhaite;
 
-    // Relation N:N avec Annonce
+    // Un candidat peut postuler à plusieurs annonces
     @ManyToMany(mappedBy = "candidats")
     private List<Annonce> annonces;
 

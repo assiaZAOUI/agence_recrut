@@ -20,13 +20,9 @@ public class Edition {
     private int numEdition;
     private Date dateParrution;
 
-    // Relation N:1 avec Journal
+    // Chaque édition est liée à un journal
     @ManyToOne
     @JoinColumn(name = "journal_id")
     private Journal journal;
-
-    // Relation N:N avec Annonce
-    @ManyToMany(mappedBy = "editions")
-    private List<Annonce> annonces;
 
 }

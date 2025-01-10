@@ -19,20 +19,17 @@ public class Offre {
     private boolean etat;
     private String niveauEtude;
 
-    // Relation N:N avec Entreprise
-    @ManyToMany(mappedBy = "offres")
-    private List<Entreprise> entreprises;
-
-    // Relation N:N avec Journal
-    @ManyToMany(mappedBy = "offres")
-    private List<Journal> journaux;
-
-    // Relation N:N avec Annonce
+    // Une offre peut être liée à plusieurs journaux
     @ManyToMany
     @JoinTable(
-            name = "offre_annonce",
+            name = "offre_journal",
             joinColumns = @JoinColumn(name = "offre_id"),
-            inverseJoinColumns = @JoinColumn(name = "annonce_id")
+            inverseJoinColumns = @JoinColumn(name = "journal_id")
     )
+    private List<Journal> journaux;
+
+    // Une offre peut contenir plusieurs annonces
+    @OneToMany(mappedBy = "offre")
     private List<Annonce> annonces;
+
 }

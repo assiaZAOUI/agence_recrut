@@ -19,8 +19,8 @@ public class Categorie {
     private int idCategorie;
     private String libelle;
 
-    // Relation 1:N avec Journal
-    @OneToMany(mappedBy = "categorie", cascade = CascadeType.ALL)
+    // Une catégorie peut contenir plusieurs journaux
+    @OneToMany(mappedBy = "categorie")
     private List<Journal> journaux;
 
 }

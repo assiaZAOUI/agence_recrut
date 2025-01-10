@@ -13,17 +13,13 @@ public class Abonnement {
     private Date dateExpiration;
     private boolean etat;
 
-    // Relation N:1 avec Entreprise
+    // Chaque abonnement est lié à une entreprise
     @ManyToOne
     @JoinColumn(name = "entreprise_id")
     private Entreprise entreprise;
 
-    // Relation N:N avec Journal
-    @ManyToMany
-    @JoinTable(
-            name = "abonnement_journal",
-            joinColumns = @JoinColumn(name = "abonnement_id"),
-            inverseJoinColumns = @JoinColumn(name = "journal_id")
-    )
-    private List<Journal> journaux;
+    // Chaque abonnement est lié à un journal
+    @ManyToOne
+    @JoinColumn(name = "journal_id")
+    private Journal journal;
 }

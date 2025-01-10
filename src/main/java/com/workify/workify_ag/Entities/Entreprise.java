@@ -21,16 +21,7 @@ public class Entreprise extends User{
     private String raisonSocial;
     private String description;
 
-    // Relation 1:N avec Abonnement
+    // Une entreprise peut avoir plusieurs abonnements
     @OneToMany(mappedBy = "entreprise", cascade = CascadeType.ALL)
     private List<Abonnement> abonnements;
-
-    // Relation N:N avec Offre
-    @ManyToMany
-    @JoinTable(
-            name = "entreprise_offre",
-            joinColumns = @JoinColumn(name = "entreprise_id"),
-            inverseJoinColumns = @JoinColumn(name = "offre_id")
-    )
-    private List<Offre> offres;
 }

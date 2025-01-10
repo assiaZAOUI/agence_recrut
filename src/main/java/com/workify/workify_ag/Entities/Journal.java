@@ -17,25 +17,20 @@ public class Journal {
     private String imageJournal;
     private String periodicite;
 
-    // Relation N:N avec Abonnement
-    @ManyToMany(mappedBy = "journaux")
-    private List<Abonnement> abonnements;
-
-    // Relation N:N avec Offre
-    @ManyToMany
-    @JoinTable(
-            name = "offre_journal",
-            joinColumns = @JoinColumn(name = "journal_id"),
-            inverseJoinColumns = @JoinColumn(name = "offre_id")
-    )
-    private List<Offre> offres;
-
-    // Relation N:1 avec Categorie
+    // Chaque journal appartient à une catégorie
     @ManyToOne
     @JoinColumn(name = "categorie_id")
     private Categorie categorie;
 
-    // Relation 1:N avec Edition
-    @OneToMany(mappedBy = "journal", cascade = CascadeType.ALL)
+    // Un journal peut être lié à plusieurs abonnements
+    @OneToMany(mappedBy = "journal")
+    private List<Abonnement> abonnements;
+
+    // Un journal peut avoir plusieurs éditions
+    @OneToMany(mappedBy = "journal")
     private List<Edition> editions;
+
+    // Un journal peut être associé à plusieurs offres
+    @ManyToMany(mappedBy = "journaux")
+    private List<Offre> offres;
 }
