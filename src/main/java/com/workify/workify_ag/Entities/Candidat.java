@@ -1,14 +1,19 @@
 package com.workify.workify_ag.Entities;
 
+import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToMany;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Data
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@DiscriminatorValue("CANDIDAT")
 public class Candidat extends User{
     private String adresse;
     private String telephone;
@@ -26,5 +31,9 @@ public class Candidat extends User{
     private String diplome;
     private int nbrAnneeExperiences;
     private double salaireSouhaite;
+
+    // Relation N:N avec Annonce
+    @ManyToMany(mappedBy = "candidats")
+    private List<Annonce> annonces;
 
 }
