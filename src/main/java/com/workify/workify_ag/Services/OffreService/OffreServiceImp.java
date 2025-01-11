@@ -1,8 +1,8 @@
 package com.workify.workify_ag.Services.OffreService;
 
 
-import com.workify.workify_ag.DTOs.OffreDTO.FiltrerOffre;
-import com.workify.workify_ag.DTOs.OffreDTO.OffreDTO;
+import com.workify.workify_ag.DTOs.OffresDTO.FiltrerOffre;
+import com.workify.workify_ag.DTOs.OffresDTO.OffreDTO;
 import com.workify.workify_ag.Entities.Offre;
 import com.workify.workify_ag.Repositorys.OffreRepo.OffreRepository;
 import com.workify.workify_ag.Specification.OffreSpecification;

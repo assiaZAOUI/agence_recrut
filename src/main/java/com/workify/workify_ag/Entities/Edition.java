@@ -18,7 +18,7 @@ public class Edition {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idEdition;
     @Column(unique = true)
-    private String numEdition;
+    private int numEdition;
     private Date dateParrution;
 
     // Chaque édition est liée à un journal

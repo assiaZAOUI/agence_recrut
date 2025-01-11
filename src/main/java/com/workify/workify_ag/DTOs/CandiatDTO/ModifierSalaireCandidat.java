@@ -6,5 +6,5 @@ import lombok.Data;
 
 public class ModifierSalaireCandidat {
     private Long idCondidat;
-    private Double nouveauSalaire;
+    private double nouveauSalaire;
 }

@@ -1,7 +1,6 @@
-package com.workify.workify_ag.DTOs.OffreDTO;
+package com.workify.workify_ag.DTOs.OffresDTO;
 
 import lombok.Data;
-import lombok.Getter;
 
 @Data
 public class OffreDTO {

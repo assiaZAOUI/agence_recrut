@@ -1,7 +1,6 @@
 package com.workify.workify_ag.Controllers.OffreControllers;
 
-import com.workify.workify_ag.DTOs.OffreDTO.FiltrerOffre;
-import com.workify.workify_ag.DTOs.OffreDTO.OffreDTO;
+import com.workify.workify_ag.DTOs.OffresDTO.*;
 import com.workify.workify_ag.Entities.Offre;
 import com.workify.workify_ag.Services.OffreService.OffreServiceImp;
 import org.springframework.http.HttpStatus;

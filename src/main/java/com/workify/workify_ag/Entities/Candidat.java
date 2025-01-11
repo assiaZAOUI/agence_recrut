@@ -14,7 +14,6 @@ import java.util.List;
 @DiscriminatorValue("CANDIDAT")
 public class Candidat extends User{
     private String adresse;
-    @Column(unique = true)
     private String telephone;
     private String photo;
     private String ville;
