@@ -12,7 +12,7 @@ import java.util.Optional;
 public interface CandidatRepository extends JpaRepository<Candidat, Integer> {
      Optional<Candidat> findCandidatByEmail(String email);
      Optional<Candidat> findByRole(String role);
-     @Query("SELECT c FROM Candidat c WHERE c.id = :id ")
+     //@Query("SELECT c FROM Candidat c WHERE c.id = :id ")
      Optional<Candidat> findById( Long id);
 
 
