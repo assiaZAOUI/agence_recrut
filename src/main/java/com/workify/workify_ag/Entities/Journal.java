@@ -12,14 +12,19 @@ public class Journal {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long code;
     private String nom;
+    @Column(unique = true)
     private String libelle;
     private String Langues;
     private String imageJournal;
     private String periodicite;
 
-    // Chaque journal appartient à une catégorie
-    @ManyToOne
-    @JoinColumn(name = "categorie_id")
+    /*seulement Journal connaît sa Categorie.
+     Categorie ne connaîtra pas Journal
+     Chaque journal appartient à une catégorie
+     Relation unidirectionnelle vers Categorie (1..1)
+    */
+    @OneToOne
+    @JoinColumn(name = "categorie_id", nullable = false) // Colonne de jointure dans Journal
     private Categorie categorie;
 
     // Un journal peut être lié à plusieurs abonnements
@@ -29,8 +34,4 @@ public class Journal {
     // Un journal peut avoir plusieurs éditions
     @OneToMany(mappedBy = "journal")
     private List<Edition> editions;
-
-    // Un journal peut être associé à plusieurs offres
-    @ManyToMany(mappedBy = "journaux")
-    private List<Offre> offres;
 }

@@ -17,10 +17,6 @@ public class Categorie {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private int idCategorie;
+    @Column(unique = true)
     private String libelle;
-
-    // Une catégorie peut contenir plusieurs journaux
-    @OneToMany(mappedBy = "categorie")
-    private List<Journal> journaux;
-
 }

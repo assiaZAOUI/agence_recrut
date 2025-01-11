@@ -58,6 +58,8 @@ public class CandidatServiceImp implements CandidatService {
         Candidat candidat = candidatRepository.findById(suppExperienceCandidat.getIdCondidat())
                 .orElseThrow(() -> new RuntimeException("Candidat non trouvé avec l'ID : " + suppExperienceCandidat.getIdCondidat()));
         candidat.setExperience("");
+        candidat.setNbrAnneeExperiences(0);
+        candidat.setNomEntreExp("");
         candidatRepository.save(candidat);
 
     }

@@ -21,14 +21,9 @@ public class Offre {
     private boolean etat;
     private String niveauEtude;
 
-    // Une offre peut être liée à plusieurs journaux
-    @ManyToMany
-    @JoinTable(
-            name = "offre_journal",
-            joinColumns = @JoinColumn(name = "offre_id"),
-            inverseJoinColumns = @JoinColumn(name = "journal_id")
-    )
-    private List<Journal> journaux;
+    // Une offre peut être présente dans plusieurs éditions
+    @OneToMany(mappedBy = "offre", cascade = CascadeType.ALL)
+    private List<Edition> editions;
 
     // Une offre peut contenir plusieurs annonces
     @OneToMany(mappedBy = "offre")
