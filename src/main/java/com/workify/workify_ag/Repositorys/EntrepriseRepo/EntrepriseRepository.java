@@ -11,8 +11,4 @@ public interface EntrepriseRepository extends JpaRepository<Entreprise, Integer>
 
     Optional<Entreprise> findByEmail(String email);
     Optional<Entreprise> findByRole(String role);
-
-
-
-
 }

@@ -17,6 +17,7 @@ public class Edition {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idEdition;
+    @Column(unique = true)
     private String numEdition;
     private Date dateParrution;
 
