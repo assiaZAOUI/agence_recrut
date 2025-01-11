@@ -3,7 +3,9 @@ package com.workify.workify_ag.Services.AuthenticationService.Authentification;
 import com.workify.workify_ag.DTOs.*;
 import com.workify.workify_ag.DTOs.SignUpRequestEntreprise;
 import com.workify.workify_ag.DTOs.jwtAuthenticationResponse;
+import com.workify.workify_ag.Entities.Candidat;
 import com.workify.workify_ag.Entities.ENUM.Roles;
+import com.workify.workify_ag.Entities.Entreprise;
 import com.workify.workify_ag.Entities.User;
 import com.workify.workify_ag.Repositorys.UserRepo.UserRepository;
 import com.workify.workify_ag.Services.JWT.JWTService;
@@ -31,7 +33,7 @@ public class AuthentificationServiceImpl implements AuthentificationService{
     @Override
     public User signupEntreprise(SignUpRequestEntreprise signUpRequest) {
         // Logique pour inscrire un utilisateur avec un rôle "ENTREPRISE"
-        User user = new User();
+        Entreprise user = new Entreprise();
         user.setEmail(signUpRequest.getEmail());
         user.setPassword(passwordEncoder.encode(signUpRequest.getPassword()));  // Hashing du mot de passe
         user.setRole(Roles.ENTREPRISE);  // Assignation du rôle "ENTREPRISE"
@@ -42,7 +44,7 @@ public class AuthentificationServiceImpl implements AuthentificationService{
     @Override
     public User signupCandidat(SignUpRequestCandidat signUpRequest) {
         // Logique pour inscrire un utilisateur avec un rôle "CANDIDAT"
-        User user = new User();
+        Candidat user = new Candidat();
         user.setEmail(signUpRequest.getEmail());
         user.setPassword(passwordEncoder.encode(signUpRequest.getPassword()));  // Hashing du mot de passe
         user.setRole(Roles.CANDIDAT);  // Assignation du rôle "CANDIDAT"
