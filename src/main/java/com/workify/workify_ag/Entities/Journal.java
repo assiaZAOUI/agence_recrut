@@ -29,8 +29,4 @@ public class Journal {
     // Un journal peut avoir plusieurs éditions
     @OneToMany(mappedBy = "journal")
     private List<Edition> editions;
-
-    // Un journal peut être associé à plusieurs offres
-    @ManyToMany(mappedBy = "journaux")
-    private List<Offre> offres;
 }

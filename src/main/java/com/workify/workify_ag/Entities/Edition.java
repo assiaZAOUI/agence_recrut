@@ -17,12 +17,16 @@ public class Edition {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idEdition;
-    private int numEdition;
+    private String numEdition;
     private Date dateParrution;
 
     // Chaque édition est liée à un journal
     @ManyToOne
-    @JoinColumn(name = "journal_id")
+    @JoinColumn(name = "journal_id" ,nullable = false/*ne peut pas accepter de valeurs nulles*/)
     private Journal journal;
 
+    // Relation avec Offre (ManyToOne)
+    @ManyToOne
+    @JoinColumn(name = "offre_id", nullable = false)
+    private Offre offre;
 }
