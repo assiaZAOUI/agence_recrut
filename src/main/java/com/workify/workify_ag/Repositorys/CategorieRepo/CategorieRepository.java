@@ -7,8 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface CategorieRepository extends JpaRepository<Categorie, Long> {
+    Optional<Categorie> findByIdCategorie(Long idCategorie);
     Optional<Categorie> findByLibelle(String libelle);
-    Categorie findByIdCategorie(int idCategorie);
-    List<Categorie> findAllCategorie();
-
+    List<Categorie> findAll();
 }

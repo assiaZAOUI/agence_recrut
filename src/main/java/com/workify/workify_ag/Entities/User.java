@@ -22,7 +22,6 @@ public class User implements UserDetails {
     @jakarta.persistence.Id
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(unique = true)
     private String email;
     private String password;
     @Enumerated(EnumType.STRING)
