@@ -1,6 +1,7 @@
 package com.workify.workify_ag.Controllers.adminControllers;
 
 
+import com.workify.workify_ag.Entities.Abonnement;
 import com.workify.workify_ag.Entities.Journal;
 import com.workify.workify_ag.Services.JournalService.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/admin")
+@RequestMapping("/api/auth")
 public class JournalController {
 
     private JournalServiceImp journalServiceImp;
@@ -41,21 +42,34 @@ public class JournalController {
 
     }
 
-    @GetMapping("filtragejour/categorie")
-    public Optional<Journal> getJournalByCategorie(@PathVariable String categorie) {
+    @GetMapping("filtragejour/categorie/{categorie}")
+    public List<Journal> getJournalByCategorie(@PathVariable String categorie) {
         return journalServiceImp.getJournalByCategorie(categorie);
 
     }
 
-    @GetMapping("filtreagejour/libelle")
+    @GetMapping("filtreagejour/libelle/{libelle}")
     public List<Journal> getJournalByLibelle(@PathVariable String libelle) {
         return journalServiceImp.getJournalByLibelle(libelle);
     }
 
     @GetMapping("tatolJournaux")
     public long getTotalJournal() {
+
         return journalServiceImp.getTotalJournals();
     }
+    @DeleteMapping("/suppjour/{journalId}")
+    public ResponseEntity<?> supprimerJournal(@PathVariable Long journalId) {
+        try {
+            journalServiceImp.SupprimerJournal(journalId);
+            return ResponseEntity.ok("Journal supprimé avec succès");
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+
+
 
 
 

@@ -1,10 +1,8 @@
 package com.workify.workify_ag.Services.JournalService;
 
-import com.workify.workify_ag.Entities.Abonnement;
-import com.workify.workify_ag.Entities.Entreprise;
-import com.workify.workify_ag.Entities.Journal;
-import com.workify.workify_ag.Entities.User;
+import com.workify.workify_ag.Entities.*;
 import com.workify.workify_ag.Repositorys.AbonnementRepo.AbonnementRepository;
+import com.workify.workify_ag.Repositorys.CategorieRepo.CategorieRepository;
 import com.workify.workify_ag.Repositorys.EntrepriseRepo.EntrepriseRepository;
 import com.workify.workify_ag.Repositorys.JournalRepo.JournalRepository;
 import com.workify.workify_ag.Repositorys.UserRepo.UserRepository;
@@ -20,20 +18,22 @@ public class JournalServiceImp implements JournalService {
     private final JournalRepository  journalRepository;
     private final AbonnementRepository abonnementRepository;
     private final EntrepriseRepository entrepriseRepository;
+    private final CategorieRepository categorieRepository;
+
 
 
     @Autowired
-    public JournalServiceImp(JournalRepository journalRepository, AbonnementRepository abonnementRepository,EntrepriseRepository entrepriseRepository) {
+    public JournalServiceImp(JournalRepository journalRepository, AbonnementRepository abonnementRepository,EntrepriseRepository entrepriseRepository,CategorieRepository categorieRepository) {
         this.journalRepository=journalRepository;
         this.abonnementRepository=abonnementRepository;
         this.entrepriseRepository=entrepriseRepository;
-
+        this.categorieRepository = categorieRepository;
     }
     public List<Journal> getAllJournals() {
 
         return journalRepository.findAll();
     }
-    public Optional<Journal> getJournalByCategorie(String categorie) {
+    public List<Journal> getJournalByCategorie(String categorie) {
 
         return journalRepository.findByCategorie(categorie);
     }
@@ -49,20 +49,53 @@ public class JournalServiceImp implements JournalService {
 
     }
     public Journal ajouterJournal(Journal journal) {
+        // Récupérer la catégorie associée au journal
+        Categorie categorie = journal.getCategorie();
 
+        if (categorie != null) {
+            // Si la catégorie a un ID, vérifiez si elle existe déjà
+            if (categorie.getIdCategorie() != null) {
+                Optional<Categorie> existingCategorie = categorieRepository.findById(categorie.getIdCategorie());
+                if (existingCategorie.isPresent()) {
+                    // Utiliser la catégorie existante
+                    journal.setCategorie(existingCategorie.get());
+                } else {
+                    throw new RuntimeException("Catégorie non trouvée avec l'ID : " + categorie.getIdCategorie());
+                }
+            } else if (categorie.getLibelle() != null) {
+                // Si la catégorie n'a pas d'ID mais a un libellé, recherchez-la par libellé
+                Optional<Categorie> existingCategorie = categorieRepository.findByLibelle(categorie.getLibelle());
+                if (existingCategorie.isPresent()) {
+                    // Utiliser la catégorie existante
+                    journal.setCategorie(existingCategorie.get());
+                } else {
+                    // Créer une nouvelle catégorie si elle n'existe pas
+                    categorie = categorieRepository.save(categorie);
+                    journal.setCategorie(categorie);
+                }
+            } else {
+                throw new IllegalArgumentException("La catégorie doit avoir un ID ou un libellé");
+            }
+        } else {
+            throw new IllegalArgumentException("La catégorie est obligatoire");
+        }
+
+        // Sauvegarder le journal
         return journalRepository.save(journal);
-
     }
-    public Abonnement subscribeToJournal(Long entrepriseId, Long journalId,Abonnement abonnement) {
 
-        Entreprise entreprise = entrepriseRepository.findById(entrepriseId)
-                .orElseThrow(() -> new RuntimeException("Utilisateur non trouvé avec l'ID : " + entrepriseId));
+        public void SupprimerJournal(Long journalId) {
 
-        Journal journal = journalRepository.findById(journalId)
-                .orElseThrow(() -> new RuntimeException("Journal non trouvé avec l'ID : " + journalId));
+            Journal journal = journalRepository.findById(journalId)
+                    .orElseThrow(() -> new RuntimeException("Journal non trouvé avec l'ID : " + journalId));
 
-        return abonnementRepository.save(abonnement);
-    }
+            journalRepository.delete(journal);
+
+
+
+        }
+
+
 
 
 }

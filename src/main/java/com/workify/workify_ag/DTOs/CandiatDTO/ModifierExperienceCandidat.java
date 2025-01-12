@@ -6,6 +6,6 @@ import lombok.Data;
 public class ModifierExperienceCandidat {
     private Long idCondidat;
     private String nomExperience;
-    private int nbrAnneExp;
+    private Integer nbrAnneExp;
     private String fonction;
 }

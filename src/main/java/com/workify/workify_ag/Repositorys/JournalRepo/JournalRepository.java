@@ -11,7 +11,7 @@ public interface JournalRepository extends JpaRepository<Journal, Long> {
 
     List<Journal> findAll();
     @Query("SELECT j FROM Journal j JOIN j.categorie c WHERE c.libelle = :nom")
-    Optional<Journal> findByCategorie(@Param("nom")String nom);
+    List<Journal> findByCategorie(@Param("nom")String nom);
     List<Journal> findByLibelle(String libelle);
     @Query("SELECT COUNT(j) FROM Journal j")
     long countAllJournals();
