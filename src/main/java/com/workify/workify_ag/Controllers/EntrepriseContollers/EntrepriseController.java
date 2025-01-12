@@ -1,6 +1,7 @@
 package com.workify.workify_ag.Controllers.EntrepriseContollers;
 
 
+import com.workify.workify_ag.DTOs.EntrepriseDTO.EntrepriseDTO;
 import com.workify.workify_ag.Entities.Entreprise;
 import com.workify.workify_ag.Services.EntrepriseService.EntrepriseServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,4 +29,15 @@ public class EntrepriseController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
+    @GetMapping("/affichageEntrep/{idEntreprise}")
+    public ResponseEntity<EntrepriseDTO> afficherEntreprise(@PathVariable Long idEntreprise) {
+            EntrepriseDTO entrep = entrepriseServiceImp.afficherEntreprise(idEntreprise);
+            return ResponseEntity.ok(entrep);
+
+
+
+
+    }
+
 }

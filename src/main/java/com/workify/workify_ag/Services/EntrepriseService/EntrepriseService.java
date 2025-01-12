@@ -1,5 +1,6 @@
 package com.workify.workify_ag.Services.EntrepriseService;
 
+import com.workify.workify_ag.DTOs.EntrepriseDTO.EntrepriseDTO;
 import com.workify.workify_ag.Entities.Entreprise;
 import org.springframework.stereotype.Service;
 
@@ -7,6 +8,8 @@ import org.springframework.stereotype.Service;
 public interface EntrepriseService {
 
     public void ModifierEntreprise(Long idEntreprise,Entreprise entreprise);
+    public EntrepriseDTO afficherEntreprise(Long idEntreprise) ;
+
 
 
 }

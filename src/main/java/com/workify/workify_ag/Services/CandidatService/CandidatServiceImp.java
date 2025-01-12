@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 public class CandidatServiceImp implements CandidatService {
 
     private final CandidatRepository candidatRepository;
-
     @Autowired
     public CandidatServiceImp(CandidatRepository candidatRepository) {
         this.candidatRepository = candidatRepository;
@@ -106,6 +105,20 @@ public class CandidatServiceImp implements CandidatService {
 
             // Sauvegarder les modifications
             candidatRepository.save(candidat);
+
+    }
+
+    public CandidatDTO afficheCandidat(Long candidatId){
+
+        Candidat candidat = candidatRepository.findById(candidatId)
+                .orElseThrow(() -> new RuntimeException("Candidat non trouvé avec l'ID : " + candidatId));
+
+        CandidatDTO candidatDTO = new CandidatDTO();
+        candidatDTO.setPrenom(candidat.getPrenom());
+        candidatDTO.setAdresse(candidat.getAdresse());
+        candidatDTO.setVille(candidat.getVille());
+
+        return candidatDTO;
 
     }
 
