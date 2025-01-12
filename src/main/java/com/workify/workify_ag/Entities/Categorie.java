@@ -16,7 +16,7 @@ public class Categorie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-    private int idCategorie;
+    private Long idCategorie;
     @Column(unique = true)
     private String libelle;
 }

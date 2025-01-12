@@ -27,8 +27,8 @@ public class Candidat extends User{
     private String motivation;
     private String filiere;
     private String diplome;
-    private int nbrAnneeExperiences;
-    private double salaireSouhaite;
+    private Integer nbrAnneeExperiences;
+    private Double salaireSouhaite;
 
     // Un candidat peut postuler à plusieurs annonces
     @OneToMany(mappedBy = "candidat", cascade = CascadeType.ALL, orphanRemoval = true)

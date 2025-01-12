@@ -53,22 +53,7 @@ public class AuthentificationServiceImpl implements AuthentificationService{
     }
 
     @Override
-    public jwtAuthenticationResponse signinEntreprise(SignInRequest signInRequest) {
-        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(signInRequest.getEmail(),
-                signInRequest.getPassword()));
-        var user = userRepository.findByEmail(signInRequest.getEmail()).orElseThrow(() -> new IllegalArgumentException("Invalid email or password"));
-        var jwt = jwtService.generateToken(user);
-
-        jwtAuthenticationResponse jwtAuthenticationResponse = new jwtAuthenticationResponse();
-
-        jwtAuthenticationResponse.setToken(jwt);
-        jwtAuthenticationResponse.setRole(user.getRole().toString());
-
-        return jwtAuthenticationResponse;
-    }
-
-    @Override
-    public jwtAuthenticationResponse signinCandidat(SignInRequest signInRequest) {
+    public jwtAuthenticationResponse signin(SignInRequest signInRequest) {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(signInRequest.getEmail(),
                 signInRequest.getPassword()));
         var user = userRepository.findByEmail(signInRequest.getEmail()).orElseThrow(() -> new IllegalArgumentException("Invalid email or password"));

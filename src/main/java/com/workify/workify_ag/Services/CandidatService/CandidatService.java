@@ -1,7 +1,9 @@
 package com.workify.workify_ag.Services.CandidatService;
 
 import com.workify.workify_ag.DTOs.CandiatDTO.*;
+import org.springframework.stereotype.Service;
 
+@Service
 public interface CandidatService {
 
     public void modifierSalaire(ModifierSalaireCandidat modifierSalaireCandidat);
