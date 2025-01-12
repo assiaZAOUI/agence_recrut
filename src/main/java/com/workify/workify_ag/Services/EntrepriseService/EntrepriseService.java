@@ -6,7 +6,8 @@ import org.springframework.stereotype.Service;
 @Service
 public interface EntrepriseService {
 
-    public void ModifierEntreprise(Long idEntreprise,Entreprise entreprise);
+    void ModifierEntreprise(Long idEntreprise,Entreprise entreprise);
+    double calculatePercentageOfEntreprisesWithOffers();
 
 
 }

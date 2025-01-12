@@ -47,4 +47,9 @@ public class CategorieController {
         categorieService.deleteCategorie(id);
         return ResponseEntity.noContent().build();
     }
+    @GetMapping("/TotalCategories")
+    public long getTotalCategories() {
+        return categorieService.getTotalCategories();
+    }
+
 }

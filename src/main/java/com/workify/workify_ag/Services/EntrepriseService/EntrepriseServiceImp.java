@@ -11,7 +11,6 @@ public class EntrepriseServiceImp implements EntrepriseService {
     public EntrepriseServiceImp(EntrepriseRepository entrepriseRepository) {
         this.entrepriseRepository = entrepriseRepository;
     }
-
     public void afficherEntreprise() {}
 
     public void ModifierEntreprise(Long idEntreprise,Entreprise entreprise) {
@@ -29,6 +28,17 @@ public class EntrepriseServiceImp implements EntrepriseService {
         // Enregistrer les modifications
          entrepriseRepository.save(entrepriseExistante);
 
+    }
+    // Calculer le pourcentage
+    public double calculatePercentageOfEntreprisesWithOffers() {
+        long totalEntreprises = entrepriseRepository.countTotalEntreprises();
+        long entreprisesWithOffers = entrepriseRepository.countEntreprisesWithOffers();
+
+        if (totalEntreprises == 0) {
+            return 0.0; // Évite la division par zéro
+        }
+
+        return (double) entreprisesWithOffers / totalEntreprises * 100;
     }
 
 

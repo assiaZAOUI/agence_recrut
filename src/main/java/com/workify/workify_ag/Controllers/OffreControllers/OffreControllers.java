@@ -25,8 +25,8 @@ public class OffreControllers {
     }
 
     @PostMapping("/ajouterOffre")
-    public ResponseEntity<Offre> ajouterOffre(@RequestBody OffreDTO offre) {
-        Offre nvOffre = offreServiceImp.ajouterOffre(offre);
+    public ResponseEntity<Offre> ajouterOffre(@RequestBody OffreDTO offreDTO) {
+        Offre nvOffre = offreServiceImp.ajouterOffre(offreDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(nvOffre);
     }
 }

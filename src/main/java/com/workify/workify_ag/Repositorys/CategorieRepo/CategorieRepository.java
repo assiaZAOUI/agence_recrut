@@ -12,4 +12,6 @@ public interface CategorieRepository extends JpaRepository<Categorie, Long> {
     Optional<Categorie> findByIdCategorie(Long idCategorie);
     Optional<Categorie> findByLibelle(String libelle);
     List<Categorie> findAll();
+    // Cette méthode est automatiquement fournie par JpaRepository
+    long count();
 }

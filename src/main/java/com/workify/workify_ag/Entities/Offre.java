@@ -12,14 +12,15 @@ import java.util.List;
 public class Offre {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idOffre;//numero
-    private String numero;
     private String titre;
     private String ville;
     private String domaine;
+    private int nbrPost;
     private int nbrAnneeExpDemander;
     private String CompetenceSouhaite;
     private boolean etat;
     private String niveauEtude;
+    private Double salaire;
 
     // Une offre peut être présente dans plusieurs éditions
     @OneToMany(mappedBy = "offre", cascade = CascadeType.ALL)
