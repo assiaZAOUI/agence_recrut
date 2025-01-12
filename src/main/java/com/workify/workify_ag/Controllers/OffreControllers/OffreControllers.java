@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/auth")
 public class OffreControllers {
     private final OffreServiceImp offreServiceImp;
 
@@ -18,12 +19,12 @@ public class OffreControllers {
         this.offreServiceImp = offreServiceImp;
     }
 
-    @GetMapping("/api/Condidat/filtrer")
+    @GetMapping("/Candidat/filtrer")
     public List<Offre> filtrerOffres(@ModelAttribute FiltrerOffre filtrerOffre) {
         return offreServiceImp.filtrerOffres(filtrerOffre);
     }
 
-    @PostMapping("/api/Entreprise/ajouterOffre")
+    @PostMapping("/ajouterOffre")
     public ResponseEntity<Offre> ajouterOffre(@RequestBody OffreDTO offre) {
         Offre nvOffre = offreServiceImp.ajouterOffre(offre);
         return ResponseEntity.status(HttpStatus.CREATED).body(nvOffre);

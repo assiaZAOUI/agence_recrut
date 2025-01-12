@@ -33,7 +33,7 @@ public class AuthenticationController {
     @PostMapping("/signin")
     public ResponseEntity<?> signin(@RequestBody SignInRequest signInRequest) {
         try {
-            return ResponseEntity.ok(authentificationService.signinCandidat(signInRequest));
+            return ResponseEntity.ok(authentificationService.signin(signInRequest));
         } catch (Exception e) {
             e.printStackTrace(); // ou utilisez un logger
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Authentication failed: " + e.getMessage());

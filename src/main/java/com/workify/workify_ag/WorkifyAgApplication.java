@@ -27,7 +27,7 @@ public class WorkifyAgApplication {
             Optional<User> admin = userRepo.findByRole(Roles.ADMIN);
             if (admin.isEmpty()) {  // Use isEmpty() to check for the absence of an admin user
                 Admin newAdmin = new Admin();
-                newAdmin.setEmail("zaouiassia1818@gmail.com");
+                newAdmin.setEmail("assiazaoui1818@gmail.com");
                 newAdmin.setRole(Roles.ADMIN);
                 newAdmin.setPassword(new BCryptPasswordEncoder().encode("assia@2000"));
                 userRepo.save(newAdmin);

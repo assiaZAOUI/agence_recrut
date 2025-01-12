@@ -3,6 +3,8 @@ package com.workify.workify_ag.SecurityConf;
 import com.workify.workify_ag.Entities.ENUM.Roles;
 import com.workify.workify_ag.Services.UserService.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -26,8 +28,8 @@ import java.util.Arrays;
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConf {
-
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
+    @Qualifier("userServiceImpl")
     private final UserService userServices;
 
     @Bean

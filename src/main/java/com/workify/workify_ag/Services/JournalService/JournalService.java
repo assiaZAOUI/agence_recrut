@@ -1,22 +1,21 @@
 package com.workify.workify_ag.Services.JournalService;
-
-import com.workify.workify_ag.Entities.Abonnement;
 import com.workify.workify_ag.Entities.Journal;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
+@Service
 public interface JournalService {
 
     List<Journal> getAllJournals();
 
-    public List<Journal> getJournalByCategorie(String categorie);
+    List<Journal> getJournalByCategorie(String categorie);
 
-    public List<Journal> getJournalByLibelle(String libelle);
+    List<Journal> getJournalByLibelle(String libelle);
 
-    public long getTotalJournals();
+    long getTotalJournals();
 
-    public Journal ajouterJournal(Journal journal);
+    Journal ajouterJournal(Journal journal);
 
-    public void SupprimerJournal(Long journalId);
+    void SupprimerJournal(Long journalId);
 }

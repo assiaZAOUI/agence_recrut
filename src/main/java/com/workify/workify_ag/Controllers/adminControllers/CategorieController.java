@@ -10,13 +10,13 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/admin")
+@RequestMapping("/api/auth")
 public class CategorieController {
     @Autowired
     private CategorieService categorieService;
 
     // Get all categories
-    @GetMapping
+    @GetMapping("/categories")
     public List<Categorie> getAllCategories() {
         return categorieService.getAllCategories();
     }
