@@ -14,4 +14,5 @@ public interface CategorieService {
     List<Categorie> getAllCategories();
     Categorie saveCategorie(Categorie categorie);
     void deleteCategorie(Long idCategorie);
+    long getTotalCategories();
 }

@@ -39,4 +39,9 @@ public class CategorieServiceImpl implements CategorieService{
     public void deleteCategorie(Long idCategorie) {
         categorieRepository.deleteById(idCategorie);
     }
+
+    @Override
+    public long getTotalCategories() {
+        return categorieRepository.count();
+    }
 }

@@ -1,6 +1,5 @@
 package com.workify.workify_ag.Services.EntrepriseService;
 
-import com.workify.workify_ag.DTOs.EntrepriseDTO.EntrepriseDTO;
 import com.workify.workify_ag.Entities.Entreprise;
 import com.workify.workify_ag.Repositorys.EntrepriseRepo.EntrepriseRepository;
 import org.springframework.stereotype.Service;
@@ -12,17 +11,7 @@ public class EntrepriseServiceImp implements EntrepriseService {
     public EntrepriseServiceImp(EntrepriseRepository entrepriseRepository) {
         this.entrepriseRepository = entrepriseRepository;
     }
-
-    public EntrepriseDTO afficherEntreprise(Long idEntreprise) {
-        Entreprise entreprise = entrepriseRepository.findById(idEntreprise).get();
-        EntrepriseDTO entrep = new EntrepriseDTO();
-        entrep.setNomEntreprise(entreprise.getNomEntreprise());
-        entrep.setDescriptionEntreprise(entreprise.getDescription());
-        entrep.setRaisonSocialEntreprise(entreprise.getRaisonSocial());
-        entrep.setVilleEntreprise(entreprise.getVille());
-        return entrep;
-
-    }
+    public void afficherEntreprise() {}
 
     public void ModifierEntreprise(Long idEntreprise,Entreprise entreprise) {
 
@@ -39,6 +28,17 @@ public class EntrepriseServiceImp implements EntrepriseService {
         // Enregistrer les modifications
          entrepriseRepository.save(entrepriseExistante);
 
+    }
+    // Calculer le pourcentage
+    public double calculatePercentageOfEntreprisesWithOffers() {
+        long totalEntreprises = entrepriseRepository.countTotalEntreprises();
+        long entreprisesWithOffers = entrepriseRepository.countEntreprisesWithOffers();
+
+        if (totalEntreprises == 0) {
+            return 0.0; // Évite la division par zéro
+        }
+
+        return (double) entreprisesWithOffers / totalEntreprises * 100;
     }
 
 
