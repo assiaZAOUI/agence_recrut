@@ -22,12 +22,16 @@ public class Offre {
     private String niveauEtude;
     private Double salaire;
 
-    // Une offre peut être présente dans plusieurs éditions
-    @OneToMany(mappedBy = "offre", cascade = CascadeType.PERSIST)
-    private List<Edition> editions;
+    @ManyToOne
+    @JoinColumn(name = "edition_id")
+    private Edition edition;
+
 
     // Une offre peut contenir plusieurs annonces
     @OneToMany(mappedBy = "offre")
     private List<Annonce> annonces;
+    @ManyToOne
+    @JoinColumn(name = "entreprise_id", nullable = false)
+    private Entreprise entreprise;
 
 }

@@ -20,7 +20,7 @@ public class OffreControllers {
     }
 
     @GetMapping("/Candidat/filtrer")
-    public List<Offre> filtrerOffres(@ModelAttribute FiltrerOffre filtrerOffre) {
+    public List<OffreDTO> filtrerOffres(@ModelAttribute FiltrerOffre filtrerOffre) {
         return offreServiceImp.filtrerOffres(filtrerOffre);
     }
 
@@ -56,5 +56,10 @@ public class OffreControllers {
     public ResponseEntity<List<Offre>> getOffresDesactivees() {
         List<Offre> offresDesactivees = offreServiceImp.getOffresDesactivees();
         return ResponseEntity.ok(offresDesactivees);
+    }
+    @DeleteMapping("suppOffre/{id}")
+    public ResponseEntity<String> supprimerOffre(@PathVariable Long id) {
+        offreServiceImp.supprimerOffre(id);
+        return ResponseEntity.ok("Offre supprimée avec succès");
     }
 }

@@ -1,5 +1,6 @@
 package com.workify.workify_ag.Entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,4 +25,8 @@ public class Entreprise extends User{
     // Une entreprise peut avoir plusieurs abonnements
     @OneToMany(mappedBy = "entreprise", cascade = CascadeType.ALL)
     private List<Abonnement> abonnements;
+    // Une entreprise peut avoir plusieurs offres
+    @OneToMany(mappedBy = "entreprise", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonBackReference // Évite la boucle infinie lors de la sérialisation JSON
+    private List<Offre> offres;
 }

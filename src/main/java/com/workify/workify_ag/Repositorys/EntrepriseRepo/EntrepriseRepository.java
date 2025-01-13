@@ -16,6 +16,7 @@ public interface EntrepriseRepository extends JpaRepository<Entreprise, Long> {
     Optional<Entreprise> findById(Long id);
     Optional<Entreprise> findByEmail(String email);
     List<Entreprise> findByRole(String role);
+    Entreprise findByNomEntreprise(String nomEntreprise);
     // Nombre total d'entreprises
     @Query("SELECT COUNT(e) FROM Entreprise e")
     long countTotalEntreprises();

@@ -25,9 +25,5 @@ public class Edition {
     @JoinColumn(name = "journal_id" ,nullable = false/*ne peut pas accepter de valeurs nulles*/)
     private Journal journal;
 
-    // Relation avec Offre (ManyToOne)
-    //eviter boucle
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "offre_id", nullable = false)
-    private Offre offre;
+    
 }

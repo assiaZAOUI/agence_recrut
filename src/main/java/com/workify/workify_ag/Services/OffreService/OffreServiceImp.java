@@ -12,9 +12,11 @@ import com.workify.workify_ag.Repositorys.OffreRepo.OffreRepository;
 import com.workify.workify_ag.Specification.OffreSpecification;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class OffreServiceImp implements OffreService{
@@ -34,13 +36,47 @@ public class OffreServiceImp implements OffreService{
         this.abonnementRepository = abonnementRepository;
     }
 
-    public List<Offre> filtrerOffres(FiltrerOffre filtrerOffre) {
+    public List<OffreDTO> filtrerOffres(FiltrerOffre filtrerOffre) {
         Specification<Offre> spec = Specification.where(OffreSpecification.hasTitre(filtrerOffre.getTitre()))
                 .and(OffreSpecification.hasVille(filtrerOffre.getVille()))
                 .and(OffreSpecification.hasDomaine(filtrerOffre.getDomaine()))
                 .and(OffreSpecification.hasNiveauEtude(filtrerOffre.getNiveauEtude()));
 
-        return offreRepository.findAll(spec);
+        List<Offre> offres = offreRepository.findAll(spec);
+
+        // Convertir les offres en FiltrerOffre
+        return offres.stream()
+                .map(this::mapToOffreDTO) // Utiliser la méthode de conversion
+                .collect(Collectors.toList());
+    }
+
+    public OffreDTO mapToOffreDTO(Offre offre) {
+        OffreDTO offreDTO = new OffreDTO();
+        offreDTO.setTitre(offre.getTitre());
+        offreDTO.setNbrPost(offre.getNbrPost());
+        offreDTO.setNbrAnneeExpDemander(offre.getNbrAnneeExpDemander());
+        offreDTO.setCompetenceSouhaite(offre.getCompetenceSouhaite());
+        offreDTO.setEtat(offre.isEtat());
+        offreDTO.setNiveauEtude(offre.getNiveauEtude());
+        offreDTO.setSalaire(offre.getSalaire());
+
+        // Mapper les IDs des relations
+        if (offre.getEdition() != null) {
+            offreDTO.setEditionId(offre.getEdition().getIdEdition());
+        }
+        if (offre.getEntreprise() != null) {
+            offreDTO.setEntreprise(offre.getEntreprise().getNomEntreprise());
+
+            // Récupérer le journal via l'abonnement de l'entreprise
+            if (!offre.getEntreprise().getAbonnements().isEmpty()) {
+                Abonnement abonnement = offre.getEntreprise().getAbonnements().get(0); // Prendre le premier abonnement
+                if (abonnement.getJournal() != null) {
+                    offreDTO.setJournalNom(abonnement.getJournal().getNom());
+                }
+            }
+        }
+
+        return offreDTO;
     }
 
     @Override
@@ -53,12 +89,11 @@ public class OffreServiceImp implements OffreService{
         offre.setEtat(true);  // Mise à jour de l'état à true après la création
         offre.setNiveauEtude(offreDTO.getNiveauEtude());
         offre.setSalaire(offreDTO.getSalaire());
-        Entreprise entrep =entrepriseRepository.findById(offreDTO.getEntrepriseId())
-                .orElseThrow(() -> new RuntimeException("Entreprise non trouvée avec l'ID : " + offreDTO.getEntrepriseId()));
+        Entreprise entrep =entrepriseRepository.findByNomEntreprise(offreDTO.getEntreprise());
 
         offre.setEntreprise(entrep);
-        Journal journal = journalRepository.findById(offreDTO.getJournalId())
-                .orElseThrow(() -> new RuntimeException("Journal non trouvé avec l'ID : " + offreDTO.getJournalId()));
+        Journal journal = journalRepository.findByNom(offreDTO.getJournalNom())
+                .orElseThrow(() -> new RuntimeException("Journal non trouvé avec l'ID : " + offreDTO.getJournalNom()));
         Abonnement abonnementActif = abonnementRepository.findByEntrepriseAndJournal(entrep, journal)
                 .orElseThrow(() -> new RuntimeException("L'entreprise n'a pas d'abonnement actif pour ce journal"));
 
@@ -81,6 +116,20 @@ public class OffreServiceImp implements OffreService{
 
         return offreRepository.save(offre);
     }
+    @Transactional
+    public void supprimerOffre(Long idOffre) {
+        try {
+            // Récupérer l'offre
+            Offre offre = offreRepository.findById(idOffre)
+                    .orElseThrow(() -> new RuntimeException("Offre non trouvée avec l'ID : " + idOffre));
+
+            offreRepository.delete(offre);
+
+        } catch (Exception e) {
+            throw new RuntimeException("Erreur lors de la suppression de l'offre : " + e.getMessage());
+        }
+    }
+
     @Override
     public List<String> getListVille() {
         return offreRepository.findDistinctVilles();

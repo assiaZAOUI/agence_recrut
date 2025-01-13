@@ -12,6 +12,7 @@ import java.util.*;
 public interface JournalRepository extends JpaRepository<Journal, Long> {
 
     List<Journal> findAll();
+    Optional<Journal> findByNom(String name);
     @Query("SELECT j FROM Journal j JOIN j.categorie c WHERE c.libelle = :nom")
     List<Journal> findByCategorie(@Param("nom")String nom);
     List<Journal> findByLibelle(String libelle);
