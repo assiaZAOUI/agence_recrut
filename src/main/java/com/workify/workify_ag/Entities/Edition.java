@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Data
@@ -27,7 +26,8 @@ public class Edition {
     private Journal journal;
 
     // Relation avec Offre (ManyToOne)
-    @ManyToOne
+    //eviter boucle
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "offre_id", nullable = false)
     private Offre offre;
 }

@@ -51,5 +51,12 @@ public class CategorieController {
     public long getTotalCategories() {
         return categorieService.getTotalCategories();
     }
+    @PutMapping("/modifierCategorie/{idCategorie}")
+    public ResponseEntity<Categorie> modifierCategorie(
+            @PathVariable Long idCategorie,
+            @RequestParam String nouveauLibelle) {
+        Categorie categorieModifiee = categorieService.modifierCategorie(idCategorie, nouveauLibelle);
+        return ResponseEntity.ok(categorieModifiee);
+    }
 
 }

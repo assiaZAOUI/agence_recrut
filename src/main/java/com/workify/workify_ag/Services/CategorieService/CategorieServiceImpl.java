@@ -44,4 +44,17 @@ public class CategorieServiceImpl implements CategorieService{
     public long getTotalCategories() {
         return categorieRepository.count();
     }
+
+    @Override
+    public Categorie modifierCategorie(Long idCategorie, String nouveauLibelle) {
+        // Récupérer la catégorie par son ID
+        Categorie categorie = categorieRepository.findById(idCategorie)
+                .orElseThrow(() -> new RuntimeException("Categorie introuvable avec l'ID : " + idCategorie));
+
+        // Modifier le libellé
+        categorie.setLibelle(nouveauLibelle);
+
+        // Sauvegarder la catégorie mise à jour
+        return categorieRepository.save(categorie);
+    }
 }

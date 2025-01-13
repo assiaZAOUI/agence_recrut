@@ -59,4 +59,28 @@ public class OffreServiceImp implements OffreService{
         // Sauvegarder l'offre dans la base de données
         return offreRepository.save(offre);
     }
+    @Override
+    public List<String> getListVille() {
+        return offreRepository.findDistinctVilles();
+    }
+
+    @Override
+    public List<String> getListFonction() {
+        return offreRepository.findDistinctFonctions();
+    }
+
+    @Override
+    public List<String> getListNiveauEtude() {
+        return offreRepository.findDistinctNiveauxEtude();
+    }
+
+    @Override
+    public List<Offre> getOffresActives() {
+        return offreRepository.findByEtat(true);
+    }
+
+    @Override
+    public List<Offre> getOffresDesactivees() {
+        return offreRepository.findByEtat(false);
+    }
 }

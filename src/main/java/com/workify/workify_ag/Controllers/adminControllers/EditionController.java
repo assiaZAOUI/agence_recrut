@@ -26,9 +26,10 @@ public class EditionController {
     }
 
     // Modifier une édition existante
-    @PutMapping("/updateEdition")
-    public ResponseEntity<Edition> modifierEdition(@RequestBody Edition edition) {
+    @PutMapping("/updateEdition/{id}")
+    public ResponseEntity<Edition> modifierEdition(@PathVariable Long id, @RequestBody Edition edition) {
         try {
+            edition.setIdEdition(id); // S'assurer que l'ID est bien défini
             Edition editionModifiee = editionService.modifierEdition(edition);
             return ResponseEntity.ok(editionModifiee);
         } catch (RuntimeException e) {
@@ -37,13 +38,13 @@ public class EditionController {
     }
 
     // Supprimer une édition
-    @DeleteMapping("/deleteEdition")
-    public ResponseEntity<Edition> supprimerEdition(@RequestBody Edition edition) {
+    @DeleteMapping("/deleteEdition/{id}")
+    public ResponseEntity<Void> supprimerEdition(@PathVariable Long id) {
         try {
-            Edition editionSupprimee = editionService.supprimerEdition(edition);
-            return ResponseEntity.ok(editionSupprimee);
+            editionService.supprimerEdition(id);
+            return ResponseEntity.noContent().build();
         } catch (RuntimeException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
 

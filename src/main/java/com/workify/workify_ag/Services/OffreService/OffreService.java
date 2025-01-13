@@ -10,5 +10,10 @@ import java.util.List;
 public interface OffreService {
     List<Offre> filtrerOffres(FiltrerOffre filtrerOffre);
     Offre ajouterOffre(OffreDTO offreDTO);
+    List<String> getListVille();
+    List<String> getListFonction();
+    List<String> getListNiveauEtude();
+    List<Offre> getOffresActives();
+    List<Offre> getOffresDesactivees();
 
 }

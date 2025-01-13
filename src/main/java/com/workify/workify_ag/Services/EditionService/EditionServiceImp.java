@@ -30,19 +30,21 @@ public class EditionServiceImp implements EditionService {
         }
     }
 
-    @Override
-    public Edition supprimerEdition(Edition edition) {
-        Optional<Edition> existingEdition = editionRepository.findById(edition.getIdEdition());
-        if (existingEdition.isPresent()) {
-            editionRepository.delete(existingEdition.get());
-            return existingEdition.get();
-        } else {
-            throw new RuntimeException("Édition introuvable pour la suppression");
+    public void supprimerEdition(Long idEdition) {
+        // Vérification si l'édition existe avant de supprimer
+        if (!editionRepository.existsById(idEdition)) {
+            throw new RuntimeException("L'édition avec l'ID " + idEdition + " n'existe pas.");
         }
+        editionRepository.deleteById(idEdition);
     }
 
     @Override
     public List<Edition> getEditionsByJournal(Long journalId) {
         return editionRepository.findByJournalCode(journalId);
+    }
+    @Override
+    public Edition getEditionById(Long idEdition) {
+        return editionRepository.findById(idEdition)
+                .orElseThrow(() -> new RuntimeException("L'édition avec l'ID " + idEdition + " n'existe pas."));
     }
 }

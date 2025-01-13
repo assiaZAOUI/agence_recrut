@@ -9,5 +9,5 @@ import java.util.List;
 @Repository
 public interface EditionRepository extends JpaRepository<Edition, Long> {
     // Trouver les éditions par ID du journal
-    List<Edition> findByJournalCode(Long journalId);
+    List<Edition> findByJournalCode(Long journalId); // Méthode personnalisée pour récupérer les éditions d'un journal
 }

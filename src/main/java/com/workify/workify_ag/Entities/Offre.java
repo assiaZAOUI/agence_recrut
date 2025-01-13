@@ -23,7 +23,7 @@ public class Offre {
     private Double salaire;
 
     // Une offre peut être présente dans plusieurs éditions
-    @OneToMany(mappedBy = "offre", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "offre", cascade = CascadeType.PERSIST)
     private List<Edition> editions;
 
     // Une offre peut contenir plusieurs annonces
