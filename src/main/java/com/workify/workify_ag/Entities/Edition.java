@@ -5,9 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Data
@@ -27,10 +25,9 @@ public class Edition {
     @JoinColumn(name = "journal_id" ,nullable = false/*ne peut pas accepter de valeurs nulles*/)
     private Journal journal;
 
-    @OneToMany(mappedBy = "edition", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Offre> offres = new ArrayList<>();
     // Relation avec Offre (ManyToOne)
-   /* @ManyToOne
+    //eviter boucle
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "offre_id", nullable = false)
-    private Offre offre;*/
+    private Offre offre;
 }

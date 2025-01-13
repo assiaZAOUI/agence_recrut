@@ -29,4 +29,32 @@ public class OffreControllers {
         Offre nvOffre = offreServiceImp.ajouterOffre(offreDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body("Offre créée avec succès. ID : " + nvOffre.getIdOffre());
     }
+    @GetMapping("/ListVilles")
+    public ResponseEntity<List<String>> getListVille() {
+        List<String> villes = offreServiceImp.getListVille();
+        return ResponseEntity.ok(villes);
+    }
+
+    @GetMapping("/ListFonctions")
+    public ResponseEntity<List<String>> getListFonction() {
+        List<String> fonctions = offreServiceImp.getListFonction();
+        return ResponseEntity.ok(fonctions);
+    }
+
+    @GetMapping("/ListNiveauxEtude")
+    public ResponseEntity<List<String>> getListNiveauEtude() {
+        List<String> niveauxEtude = offreServiceImp.getListNiveauEtude();
+        return ResponseEntity.ok(niveauxEtude);
+    }
+    @GetMapping("/ListeOffreActives")
+    public ResponseEntity<List<Offre>> getOffresActives() {
+        List<Offre> offresActives = offreServiceImp.getOffresActives();
+        return ResponseEntity.ok(offresActives);
+    }
+
+    @GetMapping("/ListeOffreDesactives")
+    public ResponseEntity<List<Offre>> getOffresDesactivees() {
+        List<Offre> offresDesactivees = offreServiceImp.getOffresDesactivees();
+        return ResponseEntity.ok(offresDesactivees);
+    }
 }

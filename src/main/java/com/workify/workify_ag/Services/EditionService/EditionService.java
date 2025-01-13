@@ -12,8 +12,9 @@ public interface EditionService {
     Edition modifierEdition(Edition edition);
 
     // Supprimer une édition existante
-    Edition supprimerEdition(Edition edition);
+    void supprimerEdition(Long idEdition);
 
     // Obtenir la liste des éditions liées à un journal spécifique
     List<Edition> getEditionsByJournal(Long journalId);
+    Edition getEditionById(Long idEdition);
 }

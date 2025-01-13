@@ -15,4 +15,5 @@ public interface CategorieService {
     Categorie saveCategorie(Categorie categorie);
     void deleteCategorie(Long idCategorie);
     long getTotalCategories();
+    Categorie modifierCategorie(Long idCategorie, String nouveauLibelle);
 }
