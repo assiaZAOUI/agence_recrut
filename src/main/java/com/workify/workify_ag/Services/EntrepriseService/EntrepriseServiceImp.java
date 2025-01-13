@@ -1,5 +1,6 @@
 package com.workify.workify_ag.Services.EntrepriseService;
 
+import com.workify.workify_ag.DTOs.EntrepriseDTO.EntrepriseDTO;
 import com.workify.workify_ag.Entities.Entreprise;
 import com.workify.workify_ag.Repositorys.EntrepriseRepo.EntrepriseRepository;
 import org.springframework.stereotype.Service;
@@ -11,7 +12,16 @@ public class EntrepriseServiceImp implements EntrepriseService {
     public EntrepriseServiceImp(EntrepriseRepository entrepriseRepository) {
         this.entrepriseRepository = entrepriseRepository;
     }
-    public void afficherEntreprise() {}
+    public EntrepriseDTO afficherEntreprise(Long idEntreprise) {
+        Entreprise entreprise = entrepriseRepository.findById(idEntreprise).get();
+        EntrepriseDTO entrep = new EntrepriseDTO();
+        entrep.setNomEntreprise(entreprise.getNomEntreprise());
+        entrep.setDescriptionEntreprise(entreprise.getDescription());
+        entrep.setRaisonSocialEntreprise(entreprise.getRaisonSocial());
+        entrep.setVilleEntreprise(entreprise.getVille());
+        return entrep;
+
+    }
 
     public void ModifierEntreprise(Long idEntreprise,Entreprise entreprise) {
 

@@ -25,8 +25,8 @@ public class OffreControllers {
     }
 
     @PostMapping("/ajouterOffre")
-    public ResponseEntity<Offre> ajouterOffre(@RequestBody OffreDTO offreDTO) {
+    public ResponseEntity<String> ajouterOffre(@RequestBody OffreDTO offreDTO) {
         Offre nvOffre = offreServiceImp.ajouterOffre(offreDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).body(nvOffre);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Offre créée avec succès. ID : " + nvOffre.getIdOffre());
     }
 }

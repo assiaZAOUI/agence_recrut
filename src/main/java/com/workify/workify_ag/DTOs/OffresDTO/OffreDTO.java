@@ -12,9 +12,10 @@ public class OffreDTO {
     private String CompetenceSouhaite;
     private boolean Etat;
     private String niveauEtude;
-    private Journal journal;
-    private Edition edition;
+    private Long journalId;
+    private Long editionId;
     private double salaire;
+    private Long entrepriseId;
 
     public boolean getEtat(){
         return Etat;

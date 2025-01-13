@@ -3,25 +3,35 @@ package com.workify.workify_ag.Services.OffreService;
 
 import com.workify.workify_ag.DTOs.OffresDTO.FiltrerOffre;
 import com.workify.workify_ag.DTOs.OffresDTO.OffreDTO;
-import com.workify.workify_ag.Entities.Edition;
-import com.workify.workify_ag.Entities.Journal;
-import com.workify.workify_ag.Entities.Offre;
+import com.workify.workify_ag.Entities.*;
+import com.workify.workify_ag.Repositorys.AbonnementRepo.AbonnementRepository;
 import com.workify.workify_ag.Repositorys.EditionRepo.EditionRepository;
+import com.workify.workify_ag.Repositorys.EntrepriseRepo.EntrepriseRepository;
 import com.workify.workify_ag.Repositorys.JournalRepo.JournalRepository;
 import com.workify.workify_ag.Repositorys.OffreRepo.OffreRepository;
 import com.workify.workify_ag.Specification.OffreSpecification;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
 public class OffreServiceImp implements OffreService{
 
     private final OffreRepository offreRepository;
+    private final EntrepriseRepository entrepriseRepository;
+    private final EditionRepository editionRepository;
+    private final JournalRepository journalRepository;
+    private final AbonnementRepository abonnementRepository;
 
-    public OffreServiceImp(OffreRepository offreRepository) {
+    public OffreServiceImp(OffreRepository offreRepository, EntrepriseRepository entrepriseRepository
+    , EditionRepository editionRepository, JournalRepository journalRepository, AbonnementRepository abonnementRepository) {
         this.offreRepository = offreRepository;
+        this.entrepriseRepository = entrepriseRepository;
+        this.editionRepository = editionRepository;
+        this.journalRepository = journalRepository;
+        this.abonnementRepository = abonnementRepository;
     }
 
     public List<Offre> filtrerOffres(FiltrerOffre filtrerOffre) {
@@ -40,23 +50,35 @@ public class OffreServiceImp implements OffreService{
         offre.setTitre(offreDTO.getTitre());
         offre.setNbrAnneeExpDemander(offreDTO.getNbrAnneeExpDemander());
         offre.setCompetenceSouhaite(offreDTO.getCompetenceSouhaite());
-        offre.setEtat(false);  // Mise à jour de l'état à true après la création
+        offre.setEtat(true);  // Mise à jour de l'état à true après la création
         offre.setNiveauEtude(offreDTO.getNiveauEtude());
         offre.setSalaire(offreDTO.getSalaire());
+        Entreprise entrep =entrepriseRepository.findById(offreDTO.getEntrepriseId())
+                .orElseThrow(() -> new RuntimeException("Entreprise non trouvée avec l'ID : " + offreDTO.getEntrepriseId()));
 
-        // Récupérer le journal à partir de son code
-        //Journal journal = JournalRepository.findById(offreDTO.getJournal().getCode())
-         //       .orElseThrow(() -> new RuntimeException("Journal not found"));
+        offre.setEntreprise(entrep);
+        Journal journal = journalRepository.findById(offreDTO.getJournalId())
+                .orElseThrow(() -> new RuntimeException("Journal non trouvé avec l'ID : " + offreDTO.getJournalId()));
+        Abonnement abonnementActif = abonnementRepository.findByEntrepriseAndJournal(entrep, journal)
+                .orElseThrow(() -> new RuntimeException("L'entreprise n'a pas d'abonnement actif pour ce journal"));
 
-        // Récupérer l'édition à partir de son id
-       // Edition edition = EditionRepository.findById(offreDTO.getEdition().getIdEdition())
-        //        .orElseThrow(() -> new RuntimeException("Edition not found"));
+        if (!abonnementActif.isEtat()) {
+            throw new RuntimeException("L'abonnement de l'entreprise pour ce journal est inactif");
+        }
 
-        // Associer le journal et l'édition à l'offre
-        //offre.setJournal(journal);
-        //offre.getEditions().add(edition);  // Associer l'édition à l'offre (s'il y en a plusieurs)
+        Date aujourdHui = new Date();
+        if (abonnementActif.getDateExpiration().before(aujourdHui)) {
+            throw new RuntimeException("L'abonnement de l'entreprise pour ce journal a expiré");
+        }
 
-        // Sauvegarder l'offre dans la base de données
+        // Récupérer l'édition du journal
+        Edition edition = editionRepository.findById(offreDTO.getEditionId())
+                .orElseThrow(() -> new RuntimeException("Édition non trouvée avec l'ID : " + offreDTO.getEditionId()));
+
+        offre.setEdition(edition);
+
+
+
         return offreRepository.save(offre);
     }
 }
