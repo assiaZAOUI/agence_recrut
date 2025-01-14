@@ -15,18 +15,18 @@ import java.util.Optional;
 @RequestMapping("/api/auth")
 public class JournalController {
 
-    private JournalServiceImp journalServiceImp;
+    private JournalService journalService;
 
     @Autowired
     public JournalController(JournalServiceImp journalServiceImp) {
-        this.journalServiceImp = journalServiceImp;
+        this.journalService = journalServiceImp;
     }
 
     @PutMapping("addJournal")
     public ResponseEntity<String> ajouterJournal(@RequestBody Journal journal) {
 
         try{
-            journalServiceImp.ajouterJournal(journal);
+            journalService.ajouterJournal(journal);
             return ResponseEntity.ok("Success");
         }catch (RuntimeException e){
             return ResponseEntity.badRequest().body(e.getMessage());
@@ -37,31 +37,31 @@ public class JournalController {
 
     @GetMapping("AllJournal")
     public List<Journal> getAllJournal() {
-            return journalServiceImp.getAllJournals();
+            return journalService.getAllJournals();
            // return ResponseEntity.ok("Success");
 
     }
 
     @GetMapping("filtragejour/categorie/{categorie}")
     public List<Journal> getJournalByCategorie(@PathVariable String categorie) {
-        return journalServiceImp.getJournalByCategorie(categorie);
+        return journalService.getJournalByCategorie(categorie);
 
     }
 
     @GetMapping("filtreagejour/libelle/{libelle}")
     public List<Journal> getJournalByLibelle(@PathVariable String libelle) {
-        return journalServiceImp.getJournalByLibelle(libelle);
+        return journalService.getJournalByLibelle(libelle);
     }
 
     @GetMapping("tatolJournaux")
     public long getTotalJournal() {
 
-        return journalServiceImp.getTotalJournals();
+        return journalService.getTotalJournals();
     }
     @DeleteMapping("/suppjour/{journalId}")
     public ResponseEntity<?> supprimerJournal(@PathVariable Long journalId) {
         try {
-            journalServiceImp.SupprimerJournal(journalId);
+            journalService.SupprimerJournal(journalId);
             return ResponseEntity.ok("Journal supprimé avec succès");
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());

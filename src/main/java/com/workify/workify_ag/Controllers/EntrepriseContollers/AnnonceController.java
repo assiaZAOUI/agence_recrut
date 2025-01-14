@@ -1,5 +1,6 @@
 package com.workify.workify_ag.Controllers.EntrepriseContollers;
 
+import com.workify.workify_ag.DTOs.PostulerRequest;
 import com.workify.workify_ag.Entities.Annonce;
 import com.workify.workify_ag.Services.AnnonceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,19 +18,18 @@ public class AnnonceController {
     private AnnonceService annonceService;
 
     /**
-     * Endpoint pour postuler à une offre.
+     * Endpoint pour ajouter une annonce (candidature).
      *
-     * @param annonce Les détails de l'annonce (candidature).
+     * @param postulerRequest Le DTO contenant les IDs du candidat, de l'entreprise et de l'offre.
      * @return L'annonce créée.
      */
     @PostMapping("/postuler")
-    public ResponseEntity<Annonce> postuler(@Validated @RequestBody Annonce annonce) {
-        try {
-            Annonce nouvelleAnnonce = annonceService.postuler(annonce);
-            return ResponseEntity.ok(nouvelleAnnonce);
-        } catch (RuntimeException e) {
-            return ResponseEntity.badRequest().body(null); // Ou retourner une réponse d'erreur personnalisée
-        }
+    public ResponseEntity<Annonce> postuler(@RequestBody PostulerRequest postulerRequest) {
+        Annonce nouvelleAnnonce = annonceService.postuler(
+                postulerRequest.getCandidatId(),
+                postulerRequest.getOffreId()
+        );
+        return ResponseEntity.ok(nouvelleAnnonce);
     }
 
     /**

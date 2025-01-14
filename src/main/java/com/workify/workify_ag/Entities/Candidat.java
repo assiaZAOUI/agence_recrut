@@ -1,5 +1,6 @@
 package com.workify.workify_ag.Entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -32,6 +33,7 @@ public class Candidat extends User{
 
     // Un candidat peut postuler à plusieurs annonces
     @OneToMany(mappedBy = "candidat", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<Annonce> annonces;
 
 }

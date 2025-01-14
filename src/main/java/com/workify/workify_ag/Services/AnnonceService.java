@@ -5,6 +5,6 @@ import com.workify.workify_ag.Entities.Annonce;
 import java.util.List;
 
 public interface AnnonceService {
-    Annonce postuler(Annonce annonce);
+    Annonce postuler(Long candidatId, Long offreId);
     List<Annonce> getCandidaturesPourOffre(Long offreId);
 }

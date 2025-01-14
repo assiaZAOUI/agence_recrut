@@ -12,10 +12,10 @@ public class Annonce {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long annonceId;
 
-    @ManyToOne
+    /*@ManyToOne
     @JoinColumn(name = "entreprise_id")
     private Entreprise entreprise; // L'entreprise qui a publié l'offre
-
+*/
     // Chaque annonce est liée à une offre
     @ManyToOne
     @JoinColumn(name = "offre_id")
@@ -25,6 +25,7 @@ public class Annonce {
     // Une annonce peut être liée à plusieurs candidats
     @ManyToOne
     @JoinColumn(name = "candidat_id")
+    @JsonBackReference
     private Candidat candidat;// Le candidat qui postule
 
 }

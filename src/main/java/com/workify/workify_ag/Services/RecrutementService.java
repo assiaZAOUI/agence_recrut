@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.List;
 
 public interface RecrutementService {
-    Recrutement ajouterRecrutement(Offre offre, Candidat candidat, Date dateRecrutement);
+    Recrutement ajouterRecrutement(Long offreId, Long candidatId);
     List<Recrutement> getHistoriqueRecrutement();
     Recrutement recruterCandidat(Long offreId, Long candidatId);
 }

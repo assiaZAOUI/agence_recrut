@@ -17,6 +17,7 @@ public interface CandidatRepository extends JpaRepository<Candidat, Integer> {
      //@Query("SELECT c FROM Candidat c WHERE c.id = :id ")
      Optional<Candidat> findById( Long id);
      List<Candidat> findAll();
+     Optional<Candidat> findCandidatById(Long id);
 
 
 

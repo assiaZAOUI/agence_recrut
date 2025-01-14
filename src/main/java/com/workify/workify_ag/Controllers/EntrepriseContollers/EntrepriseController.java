@@ -3,7 +3,9 @@ package com.workify.workify_ag.Controllers.EntrepriseContollers;
 
 import com.workify.workify_ag.DTOs.EntrepriseDTO.EntrepriseDTO;
 import com.workify.workify_ag.Entities.Entreprise;
+import com.workify.workify_ag.Entities.Recrutement;
 import com.workify.workify_ag.Services.EntrepriseService.EntrepriseServiceImp;
+import com.workify.workify_ag.Services.RecrutementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,10 +14,12 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/auth")
 public class EntrepriseController {
     private final EntrepriseServiceImp entrepriseServiceImp;
+    private  final RecrutementService recrutementServiceImp;
 
     @Autowired
-    public EntrepriseController(EntrepriseServiceImp entrepriseServiceImp) {
+    public EntrepriseController(EntrepriseServiceImp entrepriseServiceImp,RecrutementService recrutementServiceImp) {
         this.entrepriseServiceImp = entrepriseServiceImp;
+        this.recrutementServiceImp = recrutementServiceImp;
     }
 
     @PutMapping("/modentrep/{idEntreprise}")
@@ -35,9 +39,11 @@ public class EntrepriseController {
             EntrepriseDTO entrep = entrepriseServiceImp.afficherEntreprise(idEntreprise);
             return ResponseEntity.ok(entrep);
 
-
-
-
+    }
+    @PostMapping("/{offreId}/recruter/{candidatId}")
+    public ResponseEntity<Recrutement> recruterCandidat(@PathVariable Long offreId, @PathVariable Long candidatId) {
+        Recrutement recrutement = recrutementServiceImp.recruterCandidat(offreId, candidatId);
+        return ResponseEntity.ok(recrutement);
     }
 
 }
