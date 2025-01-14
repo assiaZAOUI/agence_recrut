@@ -22,6 +22,7 @@ public class Entreprise extends User{
     private String raisonSocial;
     private String description;
 
+
     // Une entreprise peut avoir plusieurs abonnements
     @OneToMany(mappedBy = "entreprise", cascade = CascadeType.ALL)
     private List<Abonnement> abonnements;

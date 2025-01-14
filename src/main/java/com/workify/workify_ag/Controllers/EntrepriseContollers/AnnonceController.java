@@ -1,7 +1,7 @@
 package com.workify.workify_ag.Controllers.EntrepriseContollers;
 
-import com.workify.workify_ag.Entities.Annonce;
-import com.workify.workify_ag.Services.AnnonceService;
+import com.workify.workify_ag.Entities.Candidature;
+import com.workify.workify_ag.Services.CandidatureService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -14,19 +14,19 @@ import java.util.List;
 public class AnnonceController {
 
     @Autowired
-    private AnnonceService annonceService;
+    private CandidatureService candidatureService;
 
     /**
      * Endpoint pour postuler à une offre.
      *
-     * @param annonce Les détails de l'annonce (candidature).
+     * @param candidature Les détails de l'annonce (candidature).
      * @return L'annonce créée.
      */
     @PostMapping("/postuler")
-    public ResponseEntity<Annonce> postuler(@Validated @RequestBody Annonce annonce) {
+    public ResponseEntity<Candidature> postuler(@Validated @RequestBody Candidature candidature) {
         try {
-            Annonce nouvelleAnnonce = annonceService.postuler(annonce);
-            return ResponseEntity.ok(nouvelleAnnonce);
+            Candidature nouvelleCandidature = candidatureService.postuler(candidature);
+            return ResponseEntity.ok(nouvelleCandidature);
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(null); // Ou retourner une réponse d'erreur personnalisée
         }
@@ -39,9 +39,9 @@ public class AnnonceController {
      * @return La liste des annonces (candidatures) pour cette offre.
      */
     @GetMapping("/candidatures")
-    public ResponseEntity<List<Annonce>> getCandidaturesPourOffre(
+    public ResponseEntity<List<Candidature>> getCandidaturesPourOffre(
             @RequestParam Long offreId) {
-        List<Annonce> candidatures = annonceService.getCandidaturesPourOffre(offreId);
+        List<Candidature> candidatures = candidatureService.getCandidaturesPourOffre(offreId);
         return ResponseEntity.ok(candidatures);
     }
 }
