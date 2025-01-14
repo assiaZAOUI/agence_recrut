@@ -1,5 +1,6 @@
 package com.workify.workify_ag.Entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -29,5 +30,6 @@ public class Edition {
     //eviter boucle
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "offre_id", nullable = false)
+    @JsonBackReference // Ignore la sérialisation de ce côté
     private Offre offre;
 }

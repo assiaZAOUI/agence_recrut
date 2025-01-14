@@ -1,5 +1,6 @@
 package com.workify.workify_ag.Entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -22,12 +23,14 @@ public class Offre {
     private String niveauEtude;
     private Double salaire;
 
-    // Une offre peut être présente dans plusieurs éditions
-    @OneToMany(mappedBy = "offre", cascade = CascadeType.PERSIST)
-    private List<Edition> editions;
-
-    // Une offre peut contenir plusieurs annonces
+    @ManyToOne
+    @JoinColumn(name = "edition_id", nullable = false)
+    private Edition edition;
     @OneToMany(mappedBy = "offre")
+    @JsonManagedReference // Gère la sérialisation de ce côté
     private List<Annonce> annonces;
-
+    //une Offre est associée à une seule Entreprise
+    @ManyToOne
+    @JoinColumn(name = "entreprise_id", nullable = false)
+    private Entreprise entreprise;
 }
