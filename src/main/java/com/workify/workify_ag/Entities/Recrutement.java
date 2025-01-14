@@ -1,9 +1,15 @@
 package com.workify.workify_ag.Entities;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class Recrutement {
     @Id
@@ -19,5 +25,12 @@ public class Recrutement {
     private Candidat candidat;
 
     private Date dateRecrutement;
+
+    // Constructeur pour faciliter la création d'un recrutement
+    public Recrutement(Offre offre, Candidat candidat, Date dateRecrutement) {
+        this.offre = offre;
+        this.candidat = candidat;
+        this.dateRecrutement = dateRecrutement;
+    }
 
 }

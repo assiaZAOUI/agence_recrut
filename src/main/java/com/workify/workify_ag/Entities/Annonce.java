@@ -1,5 +1,6 @@
 package com.workify.workify_ag.Entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -13,16 +14,17 @@ public class Annonce {
 
     @ManyToOne
     @JoinColumn(name = "entreprise_id")
-    private Entreprise entreprise; // L'entreprise qui a publié l'annonce
+    private Entreprise entreprise; // L'entreprise qui a publié l'offre
 
     // Chaque annonce est liée à une offre
     @ManyToOne
     @JoinColumn(name = "offre_id")
-    private Offre offre;
+    @JsonBackReference // Ignore la sérialisation de ce côté
+    private Offre offre; // L'offre à laquelle le candidat postule
 
     // Une annonce peut être liée à plusieurs candidats
     @ManyToOne
     @JoinColumn(name = "candidat_id")
-    private Candidat candidat;
+    private Candidat candidat;// Le candidat qui postule
 
 }
