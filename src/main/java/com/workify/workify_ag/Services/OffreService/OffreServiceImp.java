@@ -120,7 +120,7 @@ public class OffreServiceImp implements OffreService{
     public void supprimerOffre(Long idOffre) {
         try {
             // Récupérer l'offre
-            Offre offre = offreRepository.findById(idOffre)
+            Offre offre = offreRepository.findByIdOffre(idOffre)
                     .orElseThrow(() -> new RuntimeException("Offre non trouvée avec l'ID : " + idOffre));
 
             offreRepository.delete(offre);

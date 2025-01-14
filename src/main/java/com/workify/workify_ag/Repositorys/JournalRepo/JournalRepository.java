@@ -18,6 +18,6 @@ public interface JournalRepository extends JpaRepository<Journal, Long> {
     List<Journal> findByLibelle(String libelle);
     @Query("SELECT COUNT(j) FROM Journal j")
     long countAllJournals();
-
+Optional<Journal> findByCode(Long code);
     //List<Journal> findBy
 }

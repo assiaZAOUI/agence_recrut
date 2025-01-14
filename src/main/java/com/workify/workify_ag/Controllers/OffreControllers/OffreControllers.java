@@ -2,6 +2,7 @@ package com.workify.workify_ag.Controllers.OffreControllers;
 
 import com.workify.workify_ag.DTOs.OffresDTO.*;
 import com.workify.workify_ag.Entities.Offre;
+import com.workify.workify_ag.Services.OffreService.OffreService;
 import com.workify.workify_ag.Services.OffreService.OffreServiceImp;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/auth")
 public class OffreControllers {
-    private final OffreServiceImp offreServiceImp;
+    private final OffreService offreServiceImp;
 
     public OffreControllers(OffreServiceImp offreServiceImp) {
         this.offreServiceImp = offreServiceImp;

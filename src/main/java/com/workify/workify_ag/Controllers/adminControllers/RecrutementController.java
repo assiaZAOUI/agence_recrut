@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/auth")
-public class recrutementController {
+public class RecrutementController {
 
     @Autowired
     private RecrutementService recrutementService;

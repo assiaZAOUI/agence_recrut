@@ -47,6 +47,6 @@ public class CandidatureServiceImpl implements CandidatureService {
 
     @Override
     public List<Candidature> getCandidaturesPourOffre(Long offreId) {
-        return candidatureRepository.findByOffreId(offreId); // Exemple de méthode
+        return candidatureRepository.findByOffre_Id(offreId); // Exemple de méthode
     }
 }

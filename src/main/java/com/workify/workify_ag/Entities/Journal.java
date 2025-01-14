@@ -10,7 +10,7 @@ import java.util.List;
 
 public class Journal {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long code;
+    private Long code;
     private String nom;
     @Column(unique = true)
     private String libelle;

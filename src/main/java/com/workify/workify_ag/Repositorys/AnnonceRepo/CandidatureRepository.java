@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface CandidatureRepository extends JpaRepository<Candidature, Long> {
@@ -16,5 +17,10 @@ public interface CandidatureRepository extends JpaRepository<Candidature, Long> 
      * @param offreId L'ID de l'offre.
      * @return La liste des candidatures pour cette offre.
      */
-    List<Candidature> findByOffreId(Long offreId);
+    @Query("SELECT c FROM Candidature c WHERE c.offre.idOffre = :offreId")
+    List<Candidature> findByOffre_Id(Long offreId);
+    List<Candidature> findByCandidat_Id(Long candidatId);
+
+    @Override
+    Optional<Candidature> findById(Long aLong);
 }

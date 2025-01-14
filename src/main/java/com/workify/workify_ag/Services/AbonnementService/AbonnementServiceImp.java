@@ -38,6 +38,7 @@ public class AbonnementServiceImp implements AbonnementService {
             // Associer l'entreprise et le journal à l'abonnement
             abonnement.setEntreprise(entreprise);
             abonnement.setJournal(journal);
+            abonnement.setEtat(true);
 
             // Enregistrer l'abonnement
             return abonnementRepository.save(abonnement);

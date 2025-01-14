@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface OffreRepository extends JpaRepository<Offre, Long>, JpaSpecificationExecutor<Offre> {
@@ -19,4 +20,8 @@ public interface OffreRepository extends JpaRepository<Offre, Long>, JpaSpecific
     @Query("SELECT DISTINCT o.niveauEtude FROM Offre o WHERE o.niveauEtude IS NOT NULL")
     List<String> findDistinctNiveauxEtude();
     List<Offre> findByEtat(boolean etat);
+
+
+
+    Optional<Offre> findByIdOffre(Long offreId);
 }
