@@ -16,21 +16,17 @@ public class Recrutement {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    // Relation Many-to-One avec Candidature
     @ManyToOne
-    @JoinColumn(name = "offre_id", nullable = false)
-    private Offre offre;
+    @JoinColumn(name = "candidature_id", nullable = false)
+    private Candidature candidature;
 
-    @ManyToOne
-    @JoinColumn(name = "demandeur_id", nullable = false)
-    private Candidat candidat;
-
+    // Date du recrutement
     private Date dateRecrutement;
 
     // Constructeur pour faciliter la création d'un recrutement
-    public Recrutement(Offre offre, Candidat candidat, Date dateRecrutement) {
-        this.offre = offre;
-        this.candidat = candidat;
+    public Recrutement(Candidature candidature, Date dateRecrutement) {
+        this.candidature = candidature;
         this.dateRecrutement = dateRecrutement;
     }
-
 }
